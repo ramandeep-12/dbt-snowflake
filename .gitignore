@@ -1,0 +1,16 @@
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# Credentials (safety net)
+profiles.yml
+.env
+*.p8
+*.pem
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
