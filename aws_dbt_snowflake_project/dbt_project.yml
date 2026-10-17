@@ -18,5 +18,9 @@ clean-targets:
 
 models:
   aws_dbt_snowflake_project:
-    demo:
+    bronze:
       +materialized: table
+      +schema: bronze
+    silver:
+      +materialized: table
+      +schema: silver
