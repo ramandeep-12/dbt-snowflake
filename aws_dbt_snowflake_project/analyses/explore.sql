@@ -1,1 +1,5 @@
-select * from {{ ref('bookings')}}
+select * from {{ref('silver_bookings')}}
+
+
+
+select * from {{ref('obt')}}
