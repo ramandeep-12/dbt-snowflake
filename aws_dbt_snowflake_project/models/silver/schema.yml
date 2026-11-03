@@ -19,7 +19,7 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['confirmed', 'cancelled', 'pending']  # confirm against the data
+                values: ['confirmed', 'cancelled']  # confirm against the data
       - name: total_amount
         description: "nights_booked x booking_amount, rounded to 2 decimals."
       - name: created_at
