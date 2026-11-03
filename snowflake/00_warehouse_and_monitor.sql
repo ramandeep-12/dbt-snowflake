@@ -1,0 +1,27 @@
+
+USE ROLE ACCOUNTADMIN;
+
+-- 1. Warehouse: smallest size, sleeps after 60s idle, wakes on demand
+CREATE WAREHOUSE IF NOT EXISTS ELT_WH
+  WITH WAREHOUSE_SIZE = 'XSMALL'
+       AUTO_SUSPEND = 60
+       AUTO_RESUME = TRUE
+       INITIALLY_SUSPENDED = TRUE
+       COMMENT = 'Compute for the Config-Driven Snowflake ELT Framework';
+
+-- 2. Resource monitor: 5 credits per month
+CREATE OR REPLACE RESOURCE MONITOR ELT_MONITOR
+  WITH CREDIT_QUOTA = 5
+       FREQUENCY = MONTHLY
+       START_TIMESTAMP = IMMEDIATELY
+       TRIGGERS
+         ON 80 PERCENT DO NOTIFY
+         ON 100 PERCENT DO SUSPEND
+         ON 110 PERCENT DO SUSPEND_IMMEDIATE;
+
+-- 3. Attach the monitor to the warehouse
+ALTER WAREHOUSE ELT_WH SET RESOURCE_MONITOR = ELT_MONITOR;
+
+-- 4. Verify
+SHOW WAREHOUSES LIKE 'ELT_WH';
+SHOW RESOURCE MONITORS LIKE 'ELT_MONITOR';
