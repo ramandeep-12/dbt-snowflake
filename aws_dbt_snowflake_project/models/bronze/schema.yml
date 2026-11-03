@@ -1,0 +1,19 @@
+models:
+  - name: bookings
+    description: "Raw bookings loaded incrementally from the staging source on created_at."
+    columns:
+      - name: booking_id
+        description: "Primary key of a booking."
+        data_tests: [unique, not_null]
+  - name: listings
+    description: "Raw listings loaded incrementally from the staging source on created_at."
+    columns:
+      - name: listing_id
+        description: "Primary key of a listing."
+        data_tests: [unique, not_null]
+  - name: hosts
+    description: "Raw hosts loaded incrementally from the staging source on created_at."
+    columns:
+      - name: host_id
+        description: "Primary key of a host."
+        data_tests: [unique, not_null]

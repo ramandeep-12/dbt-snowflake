@@ -1,10 +1,10 @@
 snapshots:
-      - name: dim_host
-        relation: ref('host')
-        config: 
-            schema: gold
-            database: AIRBNB
-            unique_key: host_id
-            strategy: timestamp
-            updated_at: host_created_at
-            dbt_valid_to_current: "to_date('9999-12-31')"
+  - name: dim_host
+    relation: ref('silver_hosts')
+    config:
+      schema: gold
+      database: RENTALS_DB
+      unique_key: host_id
+      strategy: check
+      check_cols: ['host_name', 'is_superhost', 'response_rate', 'response_rate_quality']
+      dbt_valid_to_current: "to_date('9999-12-31')"

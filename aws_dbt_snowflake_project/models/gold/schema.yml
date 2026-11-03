@@ -1,0 +1,17 @@
+models:
+  - name: obt
+    description: "One big table: each booking joined to its listing and host, built from a Jinja config list."
+    columns:
+      - name: booking_id
+        description: "One row per booking."
+        data_tests: [unique, not_null]
+  - name: fact
+    description: "Booking fact table with keys to host and listing plus numeric measures."
+    columns:
+      - name: booking_id
+        description: "Grain of the fact table."
+        data_tests: [unique, not_null]
+      - name: listing_id
+        data_tests: [not_null]
+      - name: host_id
+        description: "Can be null if a listing's host is missing (left join)."

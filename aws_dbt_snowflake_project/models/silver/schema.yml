@@ -1,0 +1,60 @@
+models:
+  - name: silver_bookings
+    description: "Cleaned bookings with total_amount derived from nights booked and booking amount."
+    columns:
+      - name: booking_id
+        description: "Primary key of a booking."
+        data_tests: [unique, not_null]
+      - name: listing_id
+        description: "Listing that was booked."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('silver_listings')
+                field: listing_id
+      - name: booking_status
+        description: "Current status of the booking."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['confirmed', 'cancelled', 'pending']  # confirm against the data
+      - name: total_amount
+        description: "nights_booked x booking_amount, rounded to 2 decimals."
+      - name: created_at
+        description: "When the booking record was created; used as the incremental watermark."
+
+  - name: silver_listings
+    description: "Cleaned listings with standardised property type and a price band tag."
+    columns:
+      - name: listing_id
+        description: "Primary key of a listing."
+        data_tests: [unique, not_null]
+      - name: host_id
+        description: "Host who owns the listing."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('silver_hosts')
+                field: host_id
+      - name: price_per_night_tag
+        description: "Price band: low (<100), medium (<200), high."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['low', 'medium', 'high']
+
+  - name: silver_hosts
+    description: "Cleaned hosts with a response-rate quality band."
+    columns:
+      - name: host_id
+        description: "Primary key of a host."
+        data_tests: [unique, not_null]
+      - name: response_rate_quality
+        description: "Very Good (>95), Good (>80), otherwise Fair."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Very Good', 'Good', 'Fair']

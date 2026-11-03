@@ -1,7 +1,7 @@
 [project]
-name = "aws-snowflake-dbt"
+name = "config-driven-snowflake-elt-framework"
 version = "0.1.0"
-description = "Add your description here"
+description = "Config-driven ELT framework on Snowflake: S3 ingestion, Bronze/Silver/Gold dbt models, SCD Type 2 snapshots and data tests"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

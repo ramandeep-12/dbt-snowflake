@@ -1,6 +1,5 @@
 {{ config(
-    materialized='table',
-    unique_key='host_id'
+    materialized='table'
 ) }}
 
 select host_id,
