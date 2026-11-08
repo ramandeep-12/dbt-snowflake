@@ -8,3 +8,4 @@ snapshots:
       strategy: check
       check_cols: ['host_name', 'is_superhost', 'response_rate', 'response_rate_quality']
       dbt_valid_to_current: "to_date('9999-12-31')"
+      post_hook: "alter table {{ this }} modify column host_name set masking policy RENTALS_DB.GOVERNANCE.PII_NAME_MASK force"

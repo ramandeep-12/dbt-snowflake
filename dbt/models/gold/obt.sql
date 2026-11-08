@@ -1,3 +1,7 @@
+{{ config(
+    post_hook = "alter table {{ this }} modify column host_name set masking policy RENTALS_DB.GOVERNANCE.PII_NAME_MASK force"
+) }}
+
 {%
     set configs=[
         {
