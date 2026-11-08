@@ -4,9 +4,16 @@ dbt_packages/
 logs/
 .user.yml
 
+# Python / uv
+.venv/
+__pycache__/
+*.pyc
+
 # Credentials (safety net)
 profiles.yml
 .env
+.env.*
+!.env.example
 *.p8
 *.pem
 
@@ -14,5 +21,9 @@ profiles.yml
 .DS_Store
 .vscode/
 .idea/
+
 # Practice queries
 scratch/
+
+# Local data files
+data/

@@ -6,11 +6,11 @@ models:
         description: "Primary key of a booking."
         data_tests: [unique, not_null]
   - name: listings
-    description: "Raw listings loaded incrementally from the staging source on created_at."
+    description: "Raw listings JSON loaded incrementally on loaded_at."
     columns:
-      - name: listing_id
-        description: "Primary key of a listing."
-        data_tests: [unique, not_null]
+      - name: raw
+        description: "Full listing record as VARIANT."
+        data_tests: [not_null]
   - name: hosts
     description: "Raw hosts loaded incrementally from the staging source on created_at."
     columns:

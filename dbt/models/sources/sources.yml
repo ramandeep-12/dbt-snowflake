@@ -1,0 +1,11 @@
+sources:
+  - name: raw
+    database: RENTALS_DB
+    schema: RAW
+    tables:
+      - name: bookings
+        description: "Bookings loaded from CSV with COPY INTO."
+      - name: hosts
+        description: "Hosts loaded from Parquet with COPY INTO."
+      - name: listings_json
+        description: "Listings loaded from JSON into a VARIANT column."
