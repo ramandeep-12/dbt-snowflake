@@ -11,7 +11,8 @@ CREATE OR REPLACE TABLE RENTALS_DB.RAW.BOOKINGS (
   booking_id VARCHAR, listing_id NUMBER, booking_date DATE, nights_booked NUMBER,
   booking_amount NUMBER(10,2), cleaning_fee NUMBER(10,2), service_fee NUMBER(10,2),
   booking_status VARCHAR, created_at TIMESTAMP_NTZ,
-  file_name VARCHAR, loaded_at TIMESTAMP_LTZ);
+  file_name VARCHAR, loaded_at TIMESTAMP_LTZ)
+  CHANGE_TRACKING = TRUE;
 
 COPY INTO RENTALS_DB.RAW.BOOKINGS
   FROM @RENTALS_DB.RAW.S3_RAW_STAGE/bookings/
