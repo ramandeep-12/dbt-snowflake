@@ -1,0 +1,18 @@
+-- 09_ci_service_user.sql
+-- Service user for GitHub Actions: key-pair auth, no password, TRANSFORMER only.
+
+USE ROLE ACCOUNTADMIN;
+
+CREATE USER IF NOT EXISTS DBT_CI
+  TYPE = SERVICE
+  DEFAULT_ROLE = TRANSFORMER
+  DEFAULT_WAREHOUSE = ELT_WH
+  DEFAULT_SECONDARY_ROLES = ()
+  RSA_PUBLIC_KEY = '<paste public key here>'
+  COMMENT = 'GitHub Actions dbt CI';
+
+GRANT ROLE TRANSFORMER TO USER DBT_CI;
+
+DESC USER DBT_CI;
+
+SHA256:OwKUzuCb9khOl4/dtwBZJa/Y5RknNkJyTBkGAbAt9fQ=
